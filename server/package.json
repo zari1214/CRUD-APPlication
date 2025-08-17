@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "zari",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "mern stack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "keywords": []
+}
