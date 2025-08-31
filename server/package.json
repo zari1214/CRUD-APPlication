@@ -5,10 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "test": "mern stack"
-  },
+  "dev": "nodemon index.js",
+  "start": "node index.js",
+  "vercel-dev": "vercel dev"
+},
   "author": "",
   "license": "ISC",
   "dependencies": {
