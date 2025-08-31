@@ -22,7 +22,6 @@ const AddUser = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-
       const response = await axios.post("http://localhost:8000/api/users", user);
       toast.success(response.data.message || "User added successfully", {
         position: "top-right",
@@ -30,7 +29,10 @@ const AddUser = () => {
       navigate("/");
     } catch (error) {
       console.error("Axios Error:", error);
-      toast.error("Failed to connect to server. Please check backend.", {
+      const errorMessage = error.response?.data?.message || 
+                          error.response?.data?.errors?.join(", ") || 
+                          "Failed to connect to server. Please check backend.";
+      toast.error(errorMessage, {
         position: "top-right",
       });
     }
