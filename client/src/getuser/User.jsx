@@ -20,17 +20,17 @@ const User = () => {
         },[])
       
         const deleteUser = async (userId) => {
-              await axios.delete(`http://localhost:8000/api/users/${userId}`)
-              .then((response) => {
-                     setUsers((prevUser) =>prevUser.filter(user => user._id !== userId));
-             
-               toast
-                  .success(response.data.message, { position: "top-right" });
-              })
-               .catch((error) => {
-                     console.log(error);
-               })
-              }; 
+              try {
+                const response = await axios.delete(`http://localhost:8000/api/users/${userId}`);
+                setUsers((prevUser) => prevUser.filter(user => user._id !== userId));
+                toast.success(response.data.message, { position: "top-right" });
+              } catch (error) {
+                console.error("Error deleting user:", error);
+                toast.error(error.response?.data?.message || "Failed to delete user", { 
+                  position: "top-right" 
+                });
+              }
+        }; 
 
   return (
          <div className="userTable">
@@ -70,7 +70,7 @@ const User = () => {
                               <button 
                                 onClick={()=> deleteUser(user._id)}
                               type="button" className="btn btn-danger">
-                              <i className="fa a-solid fa-trash"></i>
+                              <i className="fa-solid fa-trash"></i>
                               </button>
                                 </td>
                           </tr>

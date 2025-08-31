@@ -32,14 +32,17 @@ const UpdateUser = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8000/api/users/${id}`, user)
-      .then((response) => {
-        toast.success(response.data.message, { position: "top-right" });
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    try {
+      const response = await axios.put(`http://localhost:8000/api/users/${id}`, user);
+      toast.success(response.data.message, { position: "top-right" });
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      const errorMessage = error.response?.data?.message || 
+                          error.response?.data?.errors?.join(", ") || 
+                          "Failed to update user";
+      toast.error(errorMessage, { position: "top-right" });
+    }
   };
 
   return (
